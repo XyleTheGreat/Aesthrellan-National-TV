@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Aesthrellan National Television</title>
+    <style>
+        :root {
+            --primary-red: #e63946;
+            --dark-bg: #0a0a0a;
+            --glow: 0 0 18px rgba(230, 57, 70, 0.6);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            background-color: var(--dark-bg);
+            font-family: 'Times New Roman', Times, serif;
+            overflow: hidden;
+            color: white;
+            font-size: 14px;
+        }
+
+        /* Home Screen */
+        #home-screen {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: var(--dark-bg);
+            z-index: 200;
+            transition: opacity 1.2s ease-out;
+        }
+
+        .republic-title {
+            font-size: 1.65rem;
+            font-weight: 400;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+            text-shadow: var(--glow);
+        }
+
+        .network-title {
+            font-size: 1.05rem;
+            color: #ddd;
+            letter-spacing: 2.5px;
+            margin-bottom: 45px;
+        }
+
+        .home-buttons {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .proceed-btn {
+            padding: 12px 42px;
+            font-size: 1.05rem;
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+            color: white;
+            background: transparent;
+            border: 2px solid var(--primary-red);
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: var(--glow);
+            transition: all 0.4s ease;
+        }
+
+        .proceed-btn:hover {
+            background: var(--primary-red);
+            transform: scale(1.04);
+        }
+
+        .about-btn {
+            padding: 9px 28px;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #bbb;
+            background: transparent;
+            border: 1.5px solid #555;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .about-btn:hover {
+            border-color: #aaa;
+            color: white;
+        }
+
+        /* About Modal */
+        #about-modal {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.93);
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 300;
+            padding: 20px;
+        }
+
+        .modal-content {
+            max-width: 480px;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #ddd;
+            text-align: justify;
+        }
+
+        .modal-close {
+            margin-top: 25px;
+            padding: 9px 28px;
+            background: transparent;
+            border: 1.5px solid var(--primary-red);
+            color: white;
+            font-size: 0.9rem;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        /* Channel Selection Screen - Glassmorphic Cabinet */
+        #channel-selection-screen {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: rgba(10, 10, 10, 0.88);
+            backdrop-filter: blur(12px);
+            z-index: 150;
+            transition: opacity 0.8s ease;
+        }
+
+        .selection-header {
+            font-size: 1.4rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            text-shadow: var(--glow);
+        }
+
+        .glass-cabinet {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 18px;
+            width: 100%;
+            max-width: 920px;
+            padding: 0 20px;
+        }
+
+        .glass-btn {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(14px);
+            border: 1.5px solid rgba(230, 57, 70, 0.4);
+            border-radius: 10px;
+            padding: 22px 20px;
+            font-size: 1.05rem;
+            font-weight: 400;
+            letter-spacing: 1.5px;
+            color: white;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        .glass-btn:hover {
+            background: rgba(230, 57, 70, 0.15);
+            transform: scale(1.05);
+            border-color: var(--primary-red);
+            box-shadow: var(--glow);
+        }
+
+        /* Shows Screen */
+        #shows-screen {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            display: none;
+            flex-direction: column;
+            z-index: 100;
+            transition: opacity 0.8s ease;
+        }
+
+        #shows-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 70px 15px 70px;
+        }
+
+        /* Top Navigation Bar */
+        .top-nav {
+            position: absolute;
+            top: 18px;
+            left: 18px;
+            right: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 30;
+            padding: 0 10px;
+        }
+        
+        .back-btn, .home-btn {
+            padding: 8px 22px;
+            font-size: 0.85rem;
+            background: rgba(255,255,255,0.1);
+            border: 1.5px solid var(--primary-red);
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            backdrop-filter: blur(8px);
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover, .home-btn:hover {
+            background: var(--primary-red);
+        }
+
+        .channel-header {
+            text-align: center;
+            margin: 10px 0 18px;
+        }
+
+        .channel-title {
+            font-size: 1.45rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-shadow: var(--glow);
+        }
+
+        .shows-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(245px, 1fr));
+            gap: 14px;
+            width: 100%;
+            max-width: 1150px;
+            margin: 0 auto;
+        }
+
+        .show-card {
+            background: #111;
+            border: 1.5px solid var(--primary-red);
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 0 16px rgba(0,0,0,0.7);
+        }
+
+        .show-title {
+            background: rgba(230, 57, 70, 0.12);
+            padding: 9px 12px;
+            font-size: 0.9rem;
+            font-weight: 400;
+            text-align: center;
+            border-bottom: 1px solid var(--primary-red);
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            background: #000;
+            overflow: hidden;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            border: none;
+        }
+
+        .glitch-overlay {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: repeating-linear-gradient(transparent 0px, rgba(255,30,30,0.04) 2px, transparent 4px);
+            pointer-events: none;
+            animation: glitch 0.7s infinite linear;
+            z-index: 2;
+        }
+
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-1px, 1px); }
+            40% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
+        }
+
+        .status {
+            position: absolute;
+            bottom: 7px; left: 7px;
+            background: rgba(0,0,0,0.8);
+            padding: 2px 9px;
+            font-size: 0.7rem;
+            color: #ff6666;
+            border: 1px solid var(--primary-red);
+            z-index: 3;
+        }
+
+        .footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 9px 12px;
+            text-align: center;
+            font-size: 0.75rem;
+            color: #555;
+            letter-spacing: 1px;
+            background: #0a0a0a;
+            border-top: 1px solid #222;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Home Screen -->
+    <div id="home-screen">
+        <div class="republic-title">People's Republic of Aesthrella</div>
+        <div class="network-title">Aesthrellan National Television</div>
+        
+        <div class="home-buttons">
+            <button class="proceed-btn" onclick="proceedToChannels()">PROCEED</button>
+            <button class="about-btn" onclick="showAbout()">ABOUT</button>
+        </div>
+    </div>
+
+    <!-- About Modal -->
+    <div id="about-modal">
+        <div class="modal-content">
+            Aesthrellan National Television is the official broadcasting network of the People's Republic of Aesthrella, delivering five unique channels — Katron 5, Vespagi News, Alto Republika, Khristva TV, and Kolokonchola — with a mix of live transmissions, cultural programs, news, and entertainment to citizens and viewers worldwide.
+        </div>
+        <button class="modal-close" onclick="hideAbout()">CLOSE</button>
+    </div>
+
+    <!-- Channel Selection Screen -->
+    <div id="channel-selection-screen">
+        <div class="selection-header">Select Channel</div>
+        <div class="glass-cabinet">
+            <div class="glass-btn" onclick="selectChannel(1)">KATRON 5</div>
+            <div class="glass-btn" onclick="selectChannel(2)">VESPAGI NEWS</div>
+            <div class="glass-btn" onclick="selectChannel(3)">ALTO REPUBLIKA</div>
+            <div class="glass-btn" onclick="selectChannel(4)">KHRISTVA TV</div>
+            <div class="glass-btn" onclick="selectChannel(5)">KOLOKONCHOLA</div>
+        </div>
+        <button class="home-btn" onclick="returnToHome()" style="position:absolute; top:18px; right:18px;">HOME</button>
+    </div>
+
+    <!-- Shows Screen -->
+    <div id="shows-screen">
+        <!-- Top Navigation (Back + Home only) -->
+        <div class="top-nav">
+            <button class="back-btn" onclick="backToChannelSelection()">BACK</button>
+            <button class="home-btn" onclick="returnToHome()">HOME</button>
+        </div>
+
+        <div id="shows-content">
+
+            <!-- Channel 1 -->
+            <div class="channel-content" id="content-1" style="display: none;">
+                <div class="channel-header"><div class="channel-title">KATRON 5</div></div>
+                <div class="shows-grid">
+                    <div class="show-card">
+                        <div class="show-title">Rabbids Invasion</div>
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/nhydC_Ccc0A?autoplay=0&mute=0&controls=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <div class="glitch-overlay"></div>
+                            <div class="status">LIVE</div>
+                        </div>
+                    </div>
+
+                    <div class="show-card">
+                        <div class="show-title">Masha and the Bear</div>
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/3Iqrz9G4udo?autoplay=0&mute=0&controls=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <div class="glitch-overlay"></div>
+                            <div class="status">LIVE</div>
+                        </div>
+                    </div>
+                    
+                    <div class="show-card">
+                        <div class="show-title">ChuChu TV</div>
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/YY8yc2ctN0g?autoplay=0&mute=0&controls=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <div class="glitch-overlay"></div>
+                            <div class="status">LIVE</div>
+                        </div>
+                    </div>
+                    
+                    <div class="show-card">
+                        <div class="show-title">Cocomelon</div>
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/bpTReg8lwmQ?autoplay=0&mute=0&controls=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <div class="glitch-overlay"></div>
+                            <div class="status">LIVE</div>
+                        </div>
+                    </div>  
+                     
+                    <div class="show-card">
+                        <div class="show-title">Barbie</div>
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/3YMviutzDGI?autoplay=1&mute=1&controls=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <div class="glitch-overlay"></div>
+                            <div class="status">LIVE</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Channel 2 -->
+            <div class="channel-content" id="content-2" style="display: none;">
+                <div class="channel-header"><div class="channel-title">VESPAGI NEWS</div></div>
+                <div class="shows-grid">
+                    <div class="show-card">
+                        <div class="show-title">BBC</div>
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/3YMviutzDGI?autoplay=1&mute=1&loop=1&controls=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <div class="glitch-overlay"></div>
+                            <div class="status">LIVE</div>
+                        </div>
+                    </div>
+                    <div class="show-card">
+                        <div class="show-title">National Geographic</div>
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/wVd836vHl6s?autoplay=0&mute=0&loop=0&playlist=wVd836vHl6s&controls=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <div class="glitch-overlay"></div>
+                            <div class="status">LIVE</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Channel 3 -->
+            <div class="channel-content" id="content-3" style="display: none;">
+                <div class="channel-header">
+                    <div class="channel-title">ALTO REPUBLIKA</div>
+                </div>
+                <div class="shows-grid">
+                    <div class="show-card">
+                        <div class="show-title">GMA TV</div>
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/Q_M3wzSYOCs?autoplay=0&mute=0&controls=0" 
+                                    frameborder="0" 
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                    allowfullscreen></iframe>
+                            <div class="glitch-overlay"></div>
+                            <div class="status">LIVE</div>
+                        </div>
+                    </div>
+                    
+                    <div class="show-card">
+                        <div class="show-title">DZRH TV</div>
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/QCMsndnFNPY?autoplay=0&mute=0&controls=0" 
+                                    frameborder="0" 
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                    allowfullscreen></iframe>
+                            <div class="glitch-overlay"></div>
+                            <div class="status">LIVE</div>
+                        </div>
+                    </div>
+                    
+                    <div class="show-card">
+                        <div class="show-title">DZMM TV</div>
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/UgDLDY6YcOE?autoplay=0&mute=0&controls=0" 
+                                    frameborder="0" 
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                    allowfullscreen></iframe>
+                            <div class="glitch-overlay"></div>
+                            <div class="status">LIVE</div>
+                        </div>
+                    </div>
+                    
+                    <div class="show-card">
+                        <div class="show-title">KAPAMILYA TV</div>
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/MTQTD4Qo6gE?autoplay=0&mute=0&controls=0" 
+                                    frameborder="0" 
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                    allowfullscreen></iframe>
+                            <div class="glitch-overlay"></div>
+                            <div class="status">LIVE</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Channel 4 -->
+            <div class="channel-content" id="content-4" style="display: none;">
+                <div class="channel-header"><div class="channel-title">KHRISTVA TV</div></div>
+                <div class="shows-grid">
+                    <div class="show-card">
+                        <div class="show-title">Roma TV</div>
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/A2JBODj1vio?autoplay=0&mute=0&controls=0" frameborder="0" allowfullscreen></iframe>
+                            <div class="glitch-overlay"></div>
+                            <div class="status">LIVE</div>
+                        </div>
+                    </div>
+
+                    <div class="show-card">
+                        <div class="show-title">Praise and Worship TV</div>
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/d9e-Lu2laYM?autoplay=0&mute=0&controls=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <div class="glitch-overlay"></div>
+                            <div class="status">LIVE</div>
+                        </div>
+                    </div>
+
+                    <div class="show-card">
+                        <div class="show-title">Salaam TV Salaam</div>
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/8bnohM3MjhI?autoplay=0&mute=0&loop=0&playlist=8bnohM3MjhI&controls=0" frameborder="0" allowfullscreen></iframe>
+                            <div class="glitch-overlay"></div>
+                            <div class="status">LIVE</div>
+                        </div>
+                    </div>
+                    
+                    <div class="show-card">
+                        <div class="show-title">Qur'an TV</div>
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/aeGQMcVuHFw?autoplay=0&mute=0&controls=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <div class="glitch-overlay"></div>
+                            <div class="status">LIVE</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+             <!-- Channel 5 -->
+            <div class="channel-content" id="content-5" style="display: none;">
+                <div class="channel-header"><div class="channel-title">KOLOKONCHOLA</div></div>
+                <div class="shows-grid">
+                    <div class="show-card">
+                        <div class="show-title">Cultural Pulse</div>
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/3YMviutzDGI?autoplay=1&mute=1&loop=1&playlist=3YMviutzDGI&controls=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <div class="glitch-overlay"></div>
+                            <div class="status">LIVE</div>
+                        </div>
+                    </div>
+                    <div class="show-card">
+                        <div class="show-title">Traditional Hour</div>
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/3YMviutzDGI?autoplay=1&mute=1&loop=1&controls=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <div class="glitch-overlay"></div>
+                            <div class="status">LIVE</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            AESTHRELLAN TELEVISION NETWORK • LIVE TRANSMISSION
+        </div>
+    </div>
+
+    <script>
+        function proceedToChannels() {
+            const home = document.getElementById('home-screen');
+            const selection = document.getElementById('channel-selection-screen');
+            home.style.opacity = '0';
+            setTimeout(() => {
+                home.style.display = 'none';
+                selection.style.display = 'flex';
+                selection.style.opacity = '1';
+            }, 1000);
+        }
+
+        function selectChannel(channelNum) {
+            const selection = document.getElementById('channel-selection-screen');
+            const showsScreen = document.getElementById('shows-screen');
+            
+            selection.style.opacity = '0';
+            
+            setTimeout(() => {
+                selection.style.display = 'none';
+                showsScreen.style.display = 'flex';
+                showsScreen.style.opacity = '1';
+
+                document.querySelectorAll('.channel-content').forEach(c => c.style.display = 'none');
+                const content = document.getElementById(`content-${channelNum}`);
+                if (content) content.style.display = 'block';
+            }, 800);
+        }
+
+        function backToChannelSelection() {
+            const showsScreen = document.getElementById('shows-screen');
+            const selection = document.getElementById('channel-selection-screen');
+            showsScreen.style.opacity = '0';
+            setTimeout(() => {
+                showsScreen.style.display = 'none';
+                selection.style.display = 'flex';
+                selection.style.opacity = '1';
+            }, 800);
+        }
+
+        function returnToHome() {
+            const selection = document.getElementById('channel-selection-screen');
+            const showsScreen = document.getElementById('shows-screen');
+            const home = document.getElementById('home-screen');
+            
+            if (selection.style.display === 'flex') selection.style.opacity = '0';
+            if (showsScreen.style.display === 'flex') showsScreen.style.opacity = '0';
+            
+            setTimeout(() => {
+                selection.style.display = 'none';
+                showsScreen.style.display = 'none';
+                home.style.display = 'flex';
+                home.style.opacity = '1';
+            }, 800);
+        }
+
+        function showAbout() {
+            document.getElementById('about-modal').style.display = 'flex';
+        }
+
+        function hideAbout() {
+            document.getElementById('about-modal').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
