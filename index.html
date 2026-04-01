@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Aesthrellan National Television</title>
+    <title>ANTV Live</title>
     <style>
         :root {
             --primary-red: #e63946;
@@ -337,8 +337,8 @@
 
     <!-- Home Screen -->
     <div id="home-screen">
-        <div class="republic-title">People's Republic of Aesthrella</div>
-        <div class="network-title">Aesthrellan National Television</div>
+        <div class="republic-title">People's Republic of Aesthrella<h5><p>Sangkatauhang Republika ng Estrelya</p></h5></div>
+        <div class="network-title"><i>Aesthrellan National Television (ANTV)</i></div>
         
         <div class="home-buttons">
             <button class="proceed-btn" onclick="proceedToChannels()">PROCEED</button>
@@ -349,7 +349,21 @@
     <!-- About Modal -->
     <div id="about-modal">
         <div class="modal-content">
-            Aesthrellan National Television is the official broadcasting network of the People's Republic of Aesthrella, delivering five unique channels — Katron 5, Vespagi News, Alto Republika, Khristva TV, and Kolokonchola — with a mix of live transmissions, cultural programs, news, and entertainment to citizens and viewers worldwide.
+            The <i>Aesthrellan National Television (ANTV)</i> is the official broadcasting network of the People's Republic of Aesthrella, delivering five unique channels — with a mix of live transmissions, cultural programs, news, and entertainment to citizens and viewers worldwide.<br><br>
+            LIST OF CHANNELS AND FOCUS POINTS :<br><br>
+            CH 1 — <i>Kid Shows</i>
+            <br>
+            CH 2 — <i>Nature and Science</i>
+            <br>
+            CH 3 — <i>Nat'l and Int'l News</i>
+            <br>
+            CH 4 — <i>Religion</i>
+            <br>
+            CH 5 — <i>Cooking</i>
+            <br>
+            CH 6 — <b>[SOON TO OPEN] </b><i>Approved Movies</i>
+            <br>
+            CH 7 — <b>[SOON TO OPEN] </b><i>Language and Education</i>
         </div>
         <button class="modal-close" onclick="hideAbout()">CLOSE</button>
     </div>
@@ -358,11 +372,11 @@
     <div id="channel-selection-screen">
         <div class="selection-header">Select Channel</div>
         <div class="glass-cabinet">
-            <div class="glass-btn" onclick="selectChannel(1)">KATRON 5</div>
-            <div class="glass-btn" onclick="selectChannel(2)">VESPAGI NEWS</div>
-            <div class="glass-btn" onclick="selectChannel(3)">ALTO REPUBLIKA</div>
-            <div class="glass-btn" onclick="selectChannel(4)">KHRISTVA TV</div>
-            <div class="glass-btn" onclick="selectChannel(5)">KOLOKONCHOLA</div>
+            <div class="glass-btn" onclick="selectChannel(1)">CH 1</div>
+            <div class="glass-btn" onclick="selectChannel(2)">CH 2</div>
+            <div class="glass-btn" onclick="selectChannel(3)">CH 3</div>
+            <div class="glass-btn" onclick="selectChannel(4)">CH 4</div>
+            <div class="glass-btn" onclick="selectChannel(5)">CH 5</div>
         </div>
         <button class="home-btn" onclick="returnToHome()" style="position:absolute; top:18px; right:18px;">HOME</button>
     </div>
@@ -379,7 +393,7 @@
 
             <!-- Channel 1 -->
             <div class="channel-content" id="content-1" style="display: none;">
-                <div class="channel-header"><div class="channel-title">KATRON 5</div></div>
+                <div class="channel-header"><div class="channel-title">CH 1</div></div>
                 <div class="shows-grid">
                     <div class="show-card">
                         <div class="show-title">Rabbids Invasion</div>
@@ -418,9 +432,45 @@
                     </div>  
                      
                     <div class="show-card">
-                        <div class="show-title">Barbie</div>
+                        <div class="show-title">Tom and Jerry</div>
                         <div class="video-container">
-                            <iframe src="https://www.youtube.com/embed/3YMviutzDGI?autoplay=1&mute=1&controls=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <iframe src="https://www.youtube.com/embed/rEKifG2XUZg?autoplay=0&mute=0&controls=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <div class="glitch-overlay"></div>
+                            <div class="status">LIVE</div>
+                        </div>
+                    </div>
+                    
+                    <div class="show-card">
+                        <div class="show-title">Peppa Pig</div>
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/2tCdkSE2CHw?autoplay=0&mute=0&controls=0" 
+                                    frameborder="0" 
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                    allowfullscreen></iframe>
+                            <div class="glitch-overlay"></div>
+                            <div class="status">LIVE</div>
+                        </div>
+                    </div>
+                    
+                    <div class="show-card">
+                        <div class="show-title">Sofia the First</div>
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/7Nw4A-P0rug?autoplay=0&mute=0&controls=0" 
+                                    frameborder="0" 
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                    allowfullscreen></iframe>
+                            <div class="glitch-overlay"></div>
+                            <div class="status">LIVE</div>
+                        </div>
+                    </div>
+                    
+                    <div class="show-card">
+                        <div class="show-title">Mr. Bean</div>
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/lCp-9YihW-c?autoplay=0&mute=0&controls=0" 
+                                    frameborder="0" 
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                    allowfullscreen></iframe>
                             <div class="glitch-overlay"></div>
                             <div class="status">LIVE</div>
                         </div>
@@ -430,7 +480,7 @@
 
             <!-- Channel 2 -->
             <div class="channel-content" id="content-2" style="display: none;">
-                <div class="channel-header"><div class="channel-title">VESPAGI NEWS</div></div>
+                <div class="channel-header"><div class="channel-title">CH 2</div></div>
                 <div class="shows-grid">
                     <div class="show-card">
                         <div class="show-title">NASA TV</div>
@@ -445,9 +495,9 @@
                     </div>
                     
                     <div class="show-card">
-                        <div class="show-title">BBC</div>
+                        <div class="show-title">SciTV</div>
                         <div class="video-container">
-                            <iframe src="https://www.youtube.com/embed/3YMviutzDGI?autoplay=1&mute=1&loop=1&controls=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <iframe src="https://www.youtube.com/embed/Nhc556Y1zsQ?autoplay=0&mute=0&controls=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                             <div class="glitch-overlay"></div>
                             <div class="status">LIVE</div>
                         </div>
@@ -460,15 +510,63 @@
                             <div class="status">LIVE</div>
                         </div>
                     </div>
+                    
+                    <div class="show-card">
+                        <div class="show-title">Aircrafts</div>
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/dFhW-k51Aqw?autoplay=0&mute=0&controls=0" 
+                                    frameborder="0" 
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                    allowfullscreen></iframe>
+                            <div class="glitch-overlay"></div>
+                            <div class="status">LIVE</div>
+                        </div>
+                    </div>
+                    
+                    <div class="show-card">
+                        <div class="show-title">Wildlife TV</div>
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/Zns4k_dICzs?autoplay=0&mute=0&controls=0" 
+                                    frameborder="0" 
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                    allowfullscreen></iframe>
+                            <div class="glitch-overlay"></div>
+                            <div class="status">LIVE</div>
+                        </div>
+                    </div>
+                    
+                    <div class="show-card">
+                        <div class="show-title">BBC Earth</div>
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/KGZtDK8hZ60?autoplay=0&mute=0&controls=0" 
+                                    frameborder="0" 
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                    allowfullscreen></iframe>
+                            <div class="glitch-overlay"></div>
+                            <div class="status">LIVE</div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <!-- Channel 3 -->
             <div class="channel-content" id="content-3" style="display: none;">
                 <div class="channel-header">
-                    <div class="channel-title">ALTO REPUBLIKA</div>
+                    <div class="channel-title">CH 3</div>
                 </div>
                 <div class="shows-grid">
+                    <div class="show-card">
+                        <div class="show-title">ABC NEWS</div>
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/iipR5yUp36o?autoplay=0&mute=0&controls=0" 
+                                    frameborder="0" 
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                    allowfullscreen></iframe>
+                            <div class="glitch-overlay"></div>
+                            <div class="status">LIVE</div>
+                        </div>
+                    </div>
+                    
                     <div class="show-card">
                         <div class="show-title">GMA TV</div>
                         <div class="video-container">
@@ -506,9 +604,21 @@
                     </div>
                     
                     <div class="show-card">
-                        <div class="show-title">KAPAMILYA TV</div>
+                        <div class="show-title">PTV</div>
                         <div class="video-container">
-                            <iframe src="https://www.youtube.com/embed/MTQTD4Qo6gE?autoplay=0&mute=0&controls=0" 
+                            <iframe src="https://www.youtube.com/embed/Cej2g0xzzuk?autoplay=0&mute=0&controls=0" 
+                                    frameborder="0" 
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                    allowfullscreen></iframe>
+                            <div class="glitch-overlay"></div>
+                            <div class="status">LIVE</div>
+                        </div>
+                    </div>
+                    
+                    <div class="show-card">
+                        <div class="show-title">CGTN</div>
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/_6dRRfnYJws?autoplay=0&mute=0&controls=0" 
                                     frameborder="0" 
                                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                                     allowfullscreen></iframe>
@@ -521,7 +631,7 @@
 
             <!-- Channel 4 -->
             <div class="channel-content" id="content-4" style="display: none;">
-                <div class="channel-header"><div class="channel-title">KHRISTVA TV</div></div>
+                <div class="channel-header"><div class="channel-title">CH 4</div></div>
                 <div class="shows-grid">
                     <div class="show-card">
                         <div class="show-title">Roma TV</div>
@@ -558,25 +668,65 @@
                             <div class="status">LIVE</div>
                         </div>
                     </div>
+                    
+                    <div class="show-card">
+                        <div class="show-title">Ave Maria TV</div>
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/mbQAVNmJ8hQ?autoplay=0&mute=0&controls=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <div class="glitch-overlay"></div>
+                            <div class="status">LIVE</div>
+                        </div>
+                    </div>
+                    
+                    <div class="show-card">
+                        <div class="show-title">Baclaran TV</div>
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/T43lZwJtuOo?autoplay=0&mute=0&controls=0" 
+                                    frameborder="0" 
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                    allowfullscreen></iframe>
+                            <div class="glitch-overlay"></div>
+                            <div class="status">LIVE</div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
              <!-- Channel 5 -->
             <div class="channel-content" id="content-5" style="display: none;">
-                <div class="channel-header"><div class="channel-title">KOLOKONCHOLA</div></div>
+                <div class="channel-header"><div class="channel-title">CH 5</div></div>
                 <div class="shows-grid">
                     <div class="show-card">
-                        <div class="show-title">Cultural Pulse</div>
+                        <div class="show-title">Food Network</div>
                         <div class="video-container">
-                            <iframe src="https://www.youtube.com/embed/3YMviutzDGI?autoplay=1&mute=1&loop=1&playlist=3YMviutzDGI&controls=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <iframe src="https://www.youtube.com/embed/rxP-9vgI5BE?autoplay=0&mute=0&controls=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                             <div class="glitch-overlay"></div>
                             <div class="status">LIVE</div>
                         </div>
                     </div>
+                    
                     <div class="show-card">
-                        <div class="show-title">Traditional Hour</div>
+                        <div class="show-title">Masterchef TV</div>
                         <div class="video-container">
-                            <iframe src="https://www.youtube.com/embed/3YMviutzDGI?autoplay=1&mute=1&loop=1&controls=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <iframe src="https://www.youtube.com/embed/QODUwbbVqnc?autoplay=0&mute=0&controls=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <div class="glitch-overlay"></div>
+                            <div class="status">LIVE</div>
+                        </div>
+                    </div>
+                    
+                    <div class="show-card">
+                        <div class="show-title">Asian Home Cooking</div>
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/tEh8JHKqqWY?autoplay=0&mute=0&controls=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <div class="glitch-overlay"></div>
+                            <div class="status">LIVE</div>
+                        </div>
+                    </div>
+                    
+                    <div class="show-card">
+                        <div class="show-title">Competition TV</div>
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/I4aWBmmtMT0?autoplay=0&mute=0&controls=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                             <div class="glitch-overlay"></div>
                             <div class="status">LIVE</div>
                         </div>
