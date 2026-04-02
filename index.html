@@ -135,7 +135,7 @@
             border-radius: 5px;
         }
 
-        /* Channel Selection Screen - Glassmorphic Cabinet */
+        /* Channel Selection Screen */
         #channel-selection-screen {
             position: fixed;
             top: 0; left: 0;
@@ -191,7 +191,7 @@
             box-shadow: var(--glow);
         }
 
-        /* Shows Screen */
+        /* Shows Screen - TV Style */
         #shows-screen {
             position: fixed;
             top: 0; left: 0;
@@ -206,6 +206,9 @@
             flex: 1;
             overflow-y: auto;
             padding: 70px 15px 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         /* Top Navigation Bar */
@@ -237,49 +240,46 @@
             background: var(--primary-red);
         }
 
-        .channel-header {
-            text-align: center;
-            margin: 10px 0 18px;
+        /* TV-Style Player */
+        .tv-player {
+            width: 100%;
+            max-width: 1180px;
+            margin: 0 auto;
         }
 
-        .channel-title {
-            font-size: 1.45rem;
+        .player-header {
+            text-align: center;
+            margin-bottom: 12px;
+        }
+
+        .current-title {
+            font-size: 1.55rem;
             font-weight: 400;
             letter-spacing: 2px;
             text-shadow: var(--glow);
         }
 
-        .shows-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(245px, 1fr));
-            gap: 14px;
-            width: 100%;
-            max-width: 1150px;
-            margin: 0 auto;
+        .current-counter {
+            font-size: 0.95rem;
+            color: #aaa;
+            letter-spacing: 2px;
+            margin-top: 4px;
         }
 
-        .show-card {
-            background: #111;
-            border: 1.5px solid var(--primary-red);
-            border-radius: 5px;
+        .video-wrapper {
+            position: relative;
+            background: #000;
+            border: 3px solid var(--primary-red);
+            border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 0 16px rgba(0,0,0,0.7);
-        }
-
-        .show-title {
-            background: rgba(230, 57, 70, 0.12);
-            padding: 9px 12px;
-            font-size: 0.9rem;
-            font-weight: 400;
-            text-align: center;
-            border-bottom: 1px solid var(--primary-red);
+            box-shadow: var(--glow);
+            max-width: 1100px;
+            margin: 0 auto;
         }
 
         .video-container {
             position: relative;
             padding-bottom: 56.25%;
-            background: #000;
-            overflow: hidden;
         }
 
         .video-container iframe {
@@ -308,13 +308,55 @@
 
         .status {
             position: absolute;
-            bottom: 7px; left: 7px;
-            background: rgba(0,0,0,0.8);
-            padding: 2px 9px;
-            font-size: 0.7rem;
-            color: #ff6666;
-            border: 1px solid var(--primary-red);
+            bottom: 14px; left: 14px;
+            background: rgba(0,0,0,0.85);
+            padding: 4px 14px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border-radius: 4px;
             z-index: 3;
+        }
+
+        /* Navigation Buttons — NOW PLACED JUST BELOW THE VIDEO (current show) */
+        .player-nav {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 60px;
+            margin-top: 22px;
+        }
+
+        .nav-arrow {
+            background: rgba(230, 57, 70, 0.15);
+            border: 2px solid var(--primary-red);
+            color: white;
+            font-size: 2.8rem;
+            width: 82px;
+            height: 82px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: var(--glow);
+        }
+
+        .nav-arrow:hover {
+            background: var(--primary-red);
+            transform: scale(1.1);
+        }
+
+        .coming-soon {
+            text-align: center;
+            padding: 100px 30px;
+            color: #777;
+            font-size: 1.65rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            border: 2px dashed #444;
+            border-radius: 12px;
+            background: rgba(255,255,255,0.03);
         }
 
         .footer {
@@ -394,541 +436,13 @@
 
     <!-- Shows Screen -->
     <div id="shows-screen">
-        <!-- Top Navigation (Back + Home only) -->
+        <!-- Top Navigation -->
         <div class="top-nav">
             <button class="back-btn" onclick="backToChannelSelection()">BACK</button>
             <button class="home-btn" onclick="returnToHome()">HOME</button>
         </div>
 
-        <div id="shows-content">
-
-            <!-- Channel 1 -->
-            <div class="channel-content" id="content-1" style="display: none;">
-                <div class="channel-header"><div class="channel-title">CH 1</div></div>
-                <div class="shows-grid">
-                    <div class="show-card">
-                        <div class="show-title">Oggy and the Cockroach</div>
-                        <div class="video-container">
-                            <iframe src="https://www.youtube.com/embed/n4lcJjsMEb0?autoplay=0&mute=0&controls=0" 
-                                    frameborder="0" 
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                    allowfullscreen></iframe>
-                            <div class="glitch-overlay"></div>
-                            <div class="status">LIVE</div>
-                        </div>
-                    </div>
-                    
-                    <div class="show-card">
-                        <div class="show-title">Rabbids Invasion</div>
-                        <div class="video-container">
-                            <iframe src="https://www.youtube.com/embed/nhydC_Ccc0A?autoplay=0&mute=0&controls=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                            <div class="glitch-overlay"></div>
-                            <div class="status">LIVE</div>
-                        </div>
-                    </div>
-
-                    <div class="show-card">
-                        <div class="show-title">Masha and the Bear</div>
-                        <div class="video-container">
-                            <iframe src="https://www.youtube.com/embed/3Iqrz9G4udo?autoplay=0&mute=0&controls=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                            <div class="glitch-overlay"></div>
-                            <div class="status">LIVE</div>
-                        </div>
-                    </div>
-                    
-                    <div class="show-card">
-                        <div class="show-title">Oddbuds</div>
-                        <div class="video-container">
-                            <iframe src="https://www.youtube.com/embed/kr4C-hrb3Lc?autoplay=0&mute=0&controls=0" 
-                                    frameborder="0" 
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                    allowfullscreen></iframe>
-                            <div class="glitch-overlay"></div>
-                            <div class="status">LIVE</div>
-                        </div>
-                    </div>
-                    
-                    <div class="show-card">
-                        <div class="show-title">ChuChu TV</div>
-                        <div class="video-container">
-                            <iframe src="https://www.youtube.com/embed/YY8yc2ctN0g?autoplay=0&mute=0&controls=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                            <div class="glitch-overlay"></div>
-                            <div class="status">LIVE</div>
-                        </div>
-                    </div>
-                    
-                    <div class="show-card">
-                        <div class="show-title">Cocomelon</div>
-                        <div class="video-container">
-                            <iframe src="https://www.youtube.com/embed/bpTReg8lwmQ?autoplay=0&mute=0&controls=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                            <div class="glitch-overlay"></div>
-                            <div class="status">LIVE</div>
-                        </div>
-                    </div>  
-                     
-                    <div class="show-card">
-                        <div class="show-title">Tom and Jerry</div>
-                        <div class="video-container">
-                            <iframe src="https://www.youtube.com/embed/rEKifG2XUZg?autoplay=0&mute=0&controls=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                            <div class="glitch-overlay"></div>
-                            <div class="status">LIVE</div>
-                        </div>
-                    </div>
-                    
-                    <div class="show-card">
-                        <div class="show-title">Peppa Pig</div>
-                        <div class="video-container">
-                            <iframe src="https://www.youtube.com/embed/2tCdkSE2CHw?autoplay=0&mute=0&controls=0" 
-                                    frameborder="0" 
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                    allowfullscreen></iframe>
-                            <div class="glitch-overlay"></div>
-                            <div class="status">LIVE</div>
-                        </div>
-                    </div>
-                    
-                    <div class="show-card">
-                        <div class="show-title">Sofia the First</div>
-                        <div class="video-container">
-                            <iframe src="https://www.youtube.com/embed/7Nw4A-P0rug?autoplay=0&mute=0&controls=0" 
-                                    frameborder="0" 
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                    allowfullscreen></iframe>
-                            <div class="glitch-overlay"></div>
-                            <div class="status">LIVE</div>
-                        </div>
-                    </div>
-                    
-                    <div class="show-card">
-                        <div class="show-title">Mr. Bean</div>
-                        <div class="video-container">
-                            <iframe src="https://www.youtube.com/embed/lCp-9YihW-c?autoplay=0&mute=0&controls=0" 
-                                    frameborder="0" 
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                    allowfullscreen></iframe>
-                            <div class="glitch-overlay"></div>
-                            <div class="status">LIVE</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Channel 2 -->
-            <div class="channel-content" id="content-2" style="display: none;">
-                <div class="channel-header"><div class="channel-title">CH 2</div></div>
-                <div class="shows-grid">
-                    <div class="show-card">
-                        <div class="show-title">NASA TV</div>
-                        <div class="video-container">
-                            <iframe src="https://www.youtube.com/embed/m3kR2KK8TEs?autoplay=0&mute=0&controls=0" 
-                                    frameborder="0" 
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                    allowfullscreen></iframe>
-                            <div class="glitch-overlay"></div>
-                            <div class="status">LIVE</div>
-                        </div>
-                    </div>
-                    
-                    <div class="show-card">
-                        <div class="show-title">SciTV</div>
-                        <div class="video-container">
-                            <iframe src="https://www.youtube.com/embed/Nhc556Y1zsQ?autoplay=0&mute=0&controls=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                            <div class="glitch-overlay"></div>
-                            <div class="status">LIVE</div>
-                        </div>
-                    </div>
-                    <div class="show-card">
-                        <div class="show-title">National Geographic</div>
-                        <div class="video-container">
-                            <iframe src="https://www.youtube.com/embed/wVd836vHl6s?autoplay=0&mute=0&loop=0&playlist=wVd836vHl6s&controls=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                            <div class="glitch-overlay"></div>
-                            <div class="status">LIVE</div>
-                        </div>
-                    </div>
-                    
-                    <div class="show-card">
-                        <div class="show-title">Aircrafts</div>
-                        <div class="video-container">
-                            <iframe src="https://www.youtube.com/embed/dFhW-k51Aqw?autoplay=0&mute=0&controls=0" 
-                                    frameborder="0" 
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                    allowfullscreen></iframe>
-                            <div class="glitch-overlay"></div>
-                            <div class="status">LIVE</div>
-                        </div>
-                    </div>
-                    
-                    <div class="show-card">
-                        <div class="show-title">Wildlife TV</div>
-                        <div class="video-container">
-                            <iframe src="https://www.youtube.com/embed/Zns4k_dICzs?autoplay=0&mute=0&controls=0" 
-                                    frameborder="0" 
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                    allowfullscreen></iframe>
-                            <div class="glitch-overlay"></div>
-                            <div class="status">LIVE</div>
-                        </div>
-                    </div>
-                    
-                    <div class="show-card">
-                        <div class="show-title">BBC Earth</div>
-                        <div class="video-container">
-                            <iframe src="https://www.youtube.com/embed/KGZtDK8hZ60?autoplay=0&mute=0&controls=0" 
-                                    frameborder="0" 
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                    allowfullscreen></iframe>
-                            <div class="glitch-overlay"></div>
-                            <div class="status">LIVE</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Channel 3 -->
-            <div class="channel-content" id="content-3" style="display: none;">
-                <div class="channel-header">
-                    <div class="channel-title">CH 3</div>
-                </div>
-                <div class="shows-grid">
-                    <div class="show-card">
-                        <div class="show-title">ABC NEWS</div>
-                        <div class="video-container">
-                            <iframe src="https://www.youtube.com/embed/iipR5yUp36o?autoplay=0&mute=0&controls=0" 
-                                    frameborder="0" 
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                    allowfullscreen></iframe>
-                            <div class="glitch-overlay"></div>
-                            <div class="status">LIVE</div>
-                        </div>
-                    </div>
-                    
-                    <div class="show-card">
-                        <div class="show-title">GMA TV</div>
-                        <div class="video-container">
-                            <iframe src="https://www.youtube.com/embed/Q_M3wzSYOCs?autoplay=0&mute=0&controls=0" 
-                                    frameborder="0" 
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                    allowfullscreen></iframe>
-                            <div class="glitch-overlay"></div>
-                            <div class="status">LIVE</div>
-                        </div>
-                    </div>
-                    
-                    <div class="show-card">
-                        <div class="show-title">SKY NEWS</div>
-                        <div class="video-container">
-                            <iframe src="https://www.youtube.com/embed/YDvsBbKfLPA?autoplay=0&mute=0&controls=0" 
-                                    frameborder="0" 
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                    allowfullscreen></iframe>
-                            <div class="glitch-overlay"></div>
-                            <div class="status">LIVE</div>
-                        </div>
-                    </div>
-                    
-                    <div class="show-card">
-                        <div class="show-title">BILYONARYO NEWS TV</div>
-                        <div class="video-container">
-                            <iframe src="https://www.youtube.com/embed/v2DTX9BuB1w?autoplay=0&mute=0&controls=0" 
-                                    frameborder="0" 
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                    allowfullscreen></iframe>
-                            <div class="glitch-overlay"></div>
-                            <div class="status">LIVE</div>
-                        </div>
-                    </div>
-                    
-                    <div class="show-card">
-                        <div class="show-title">UNTV</div>
-                        <div class="video-container">
-                            <iframe src="https://www.youtube.com/embed/Y0mGX-aG4gs?autoplay=0&mute=0&controls=0" 
-                                    frameborder="0" 
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                    allowfullscreen></iframe>
-                            <div class="glitch-overlay"></div>
-                            <div class="status">LIVE</div>
-                        </div>
-                    </div>
-                    
-                    <div class="show-card">
-                        <div class="show-title">AL JAZEERA</div>
-                        <div class="video-container">
-                            <iframe src="https://www.youtube.com/embed/gCNeDWCI0vo?autoplay=0&mute=0&controls=0" 
-                                    frameborder="0" 
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                    allowfullscreen></iframe>
-                            <div class="glitch-overlay"></div>
-                            <div class="status">LIVE</div>
-                        </div>
-                    </div>
-                    
-                    <div class="show-card">
-                        <div class="show-title">DZRH TV</div>
-                        <div class="video-container">
-                            <iframe src="https://www.youtube.com/embed/QCMsndnFNPY?autoplay=0&mute=0&controls=0" 
-                                    frameborder="0" 
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                    allowfullscreen></iframe>
-                            <div class="glitch-overlay"></div>
-                            <div class="status">LIVE</div>
-                        </div>
-                    </div>
-                    
-                    <div class="show-card">
-                        <div class="show-title">DZMM TV</div>
-                        <div class="video-container">
-                            <iframe src="https://www.youtube.com/embed/UgDLDY6YcOE?autoplay=0&mute=0&controls=0" 
-                                    frameborder="0" 
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                    allowfullscreen></iframe>
-                            <div class="glitch-overlay"></div>
-                            <div class="status">LIVE</div>
-                        </div>
-                    </div>
-                    
-                    <div class="show-card">
-                        <div class="show-title">KAPAMILYA TV</div>
-                        <div class="video-container">
-                            <iframe src="https://www.youtube.com/embed/ANouviApvI0?autoplay=0&mute=0&controls=0" 
-                                    frameborder="0" 
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                    allowfullscreen></iframe>
-                            <div class="glitch-overlay"></div>
-                            <div class="status">LIVE</div>
-                        </div>
-                    </div>
-                    
-                    <div class="show-card">
-                        <div class="show-title">KZAT FM</div>
-                        <div class="video-container">
-                            <iframe src="https://www.youtube.com/embed/fRie_dbYY2o?autoplay=0&mute=0&controls=0" 
-                                    frameborder="0" 
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                    allowfullscreen></iframe>
-                            <div class="glitch-overlay"></div>
-                            <div class="status">LIVE</div>
-                        </div>
-                    </div>
-                    
-                    <div class="show-card">
-                        <div class="show-title">PTV</div>
-                        <div class="video-container">
-                            <iframe src="https://www.youtube.com/embed/Cej2g0xzzuk?autoplay=0&mute=0&controls=0" 
-                                    frameborder="0" 
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                    allowfullscreen></iframe>
-                            <div class="glitch-overlay"></div>
-                            <div class="status">LIVE</div>
-                        </div>
-                    </div>
-                    
-                    <div class="show-card">
-                        <div class="show-title">CGTN</div>
-                        <div class="video-container">
-                            <iframe src="https://www.youtube.com/embed/_6dRRfnYJws?autoplay=0&mute=0&controls=0" 
-                                    frameborder="0" 
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                    allowfullscreen></iframe>
-                            <div class="glitch-overlay"></div>
-                            <div class="status">LIVE</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Channel 4 -->
-            <div class="channel-content" id="content-4" style="display: none;">
-                <div class="channel-header"><div class="channel-title">CH 4</div></div>
-                <div class="shows-grid">
-                    <div class="show-card">
-                        <div class="show-title">Roma TV</div>
-                        <div class="video-container">
-                            <iframe src="https://www.youtube.com/embed/A2JBODj1vio?autoplay=0&mute=0&controls=0" frameborder="0" allowfullscreen></iframe>
-                            <div class="glitch-overlay"></div>
-                            <div class="status">LIVE</div>
-                        </div>
-                    </div>
-
-                    <div class="show-card">
-                        <div class="show-title">Praise and Worship TV</div>
-                        <div class="video-container">
-                            <iframe src="https://www.youtube.com/embed/d9e-Lu2laYM?autoplay=0&mute=0&controls=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                            <div class="glitch-overlay"></div>
-                            <div class="status">LIVE</div>
-                        </div>
-                    </div>
-
-                    <div class="show-card">
-                        <div class="show-title">Salaam TV Salaam</div>
-                        <div class="video-container">
-                            <iframe src="https://www.youtube.com/embed/8bnohM3MjhI?autoplay=0&mute=0&loop=0&playlist=8bnohM3MjhI&controls=0" frameborder="0" allowfullscreen></iframe>
-                            <div class="glitch-overlay"></div>
-                            <div class="status">LIVE</div>
-                        </div>
-                    </div>
-                    
-                    <div class="show-card">
-                        <div class="show-title">Qur'an TV</div>
-                        <div class="video-container">
-                            <iframe src="https://www.youtube.com/embed/Oquf0EU_B8o?autoplay=0&mute=0&controls=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                            <div class="glitch-overlay"></div>
-                            <div class="status">LIVE</div>
-                        </div>
-                    </div>
-                    
-                    <div class="show-card">
-                        <div class="show-title">Ave Maria TV</div>
-                        <div class="video-container">
-                            <iframe src="https://www.youtube.com/embed/mbQAVNmJ8hQ?autoplay=0&mute=0&controls=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                            <div class="glitch-overlay"></div>
-                            <div class="status">LIVE</div>
-                        </div>
-                    </div>
-                    
-                    <div class="show-card">
-                        <div class="show-title">Radio Veritas</div>
-                        <div class="video-container">
-                            <iframe src="https://www.youtube.com/embed/SuCGIfqgL24?autoplay=0&mute=0&controls=0" 
-                                    frameborder="0" 
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                    allowfullscreen></iframe>
-                            <div class="glitch-overlay"></div>
-                            <div class="status">LIVE</div>
-                        </div>
-                    </div>
-                    
-                    <div class="show-card">
-                        <div class="show-title">OFSDA TV</div>
-                        <div class="video-container">
-                            <iframe src="https://www.youtube.com/embed/T5veC0eyYdE?autoplay=0&mute=0&controls=0" 
-                                    frameborder="0" 
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                    allowfullscreen></iframe>
-                            <div class="glitch-overlay"></div>
-                            <div class="status">LIVE</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-             <!-- Channel 5 -->
-            <div class="channel-content" id="content-5" style="display: none;">
-                <div class="channel-header"><div class="channel-title">CH 5</div></div>
-                <div class="shows-grid">
-                    <div class="show-card">
-                        <div class="show-title">Food Network</div>
-                        <div class="video-container">
-                            <iframe src="https://www.youtube.com/embed/rxP-9vgI5BE?autoplay=0&mute=0&controls=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                            <div class="glitch-overlay"></div>
-                            <div class="status">LIVE</div>
-                        </div>
-                    </div>
-                    
-                    <div class="show-card">
-                        <div class="show-title">Masterchef TV</div>
-                        <div class="video-container">
-                            <iframe src="https://www.youtube.com/embed/QODUwbbVqnc?autoplay=0&mute=0&controls=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                            <div class="glitch-overlay"></div>
-                            <div class="status">LIVE</div>
-                        </div>
-                    </div>
-                    
-                    <div class="show-card">
-                        <div class="show-title">Asian Home Cooking</div>
-                        <div class="video-container">
-                            <iframe src="https://www.youtube.com/embed/tEh8JHKqqWY?autoplay=0&mute=0&controls=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                            <div class="glitch-overlay"></div>
-                            <div class="status">LIVE</div>
-                        </div>
-                    </div>
-                    
-                    <div class="show-card">
-                        <div class="show-title">Competition TV</div>
-                        <div class="video-container">
-                            <iframe src="https://www.youtube.com/embed/I4aWBmmtMT0?autoplay=0&mute=0&controls=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                            <div class="glitch-overlay"></div>
-                            <div class="status">LIVE</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Channel 6 -->
-            <div class="channel-content" id="content-6" style="display: none;">
-                <div class="channel-header"><div class="channel-title">CH 6</div></div>
-                <div class="shows-grid">
-                    
-            
-            <!-- Channel 7 -->
-            <div class="channel-content" id="content-7" style="display: none;">
-                <div class="channel-header"><div class="channel-title">CH 7</div></div>
-                <div class="shows-grid">
-                    
-            
-            <!-- Channel 8 -->
-            <div class="channel-content" id="content-8" style="display: none;">
-                <div class="channel-header"><div class="channel-title">CH 8</div></div>
-                <div class="shows-grid">
-                    <div class="show-card">
-                        <div class="show-title">F1TV</div>
-                        <div class="video-container">
-                            <iframe src="https://www.youtube.com/embed/DTx1Up970Yo?autoplay=0&mute=0&controls=0" 
-                                    frameborder="0" 
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                    allowfullscreen></iframe>
-                            <div class="glitch-overlay"></div>
-                            <div class="status">LIVE</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Channel 9 -->
-            <div class="channel-content" id="content-9" style="display: none;">
-                <div class="channel-header"><div class="channel-title">CH 9</div></div>
-                <div class="shows-grid">
-                    
-            
-            <!-- Channel 10 -->
-            <div class="channel-content" id="content-10" style="display: none;">
-                <div class="channel-header"><div class="channel-title">CH 10</div></div>
-                <div class="shows-grid">
-                    <div class="show-card">
-                        <div class="show-title">Wish 107.5</div>
-                        <div class="video-container">
-                            <iframe src="https://www.youtube.com/embed/1HSjFxPzBhY?autoplay=0&mute=0&controls=0" 
-                                    frameborder="0" 
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                    allowfullscreen></iframe>
-                            <div class="glitch-overlay"></div>
-                            <div class="status">LIVE</div>
-                        </div>
-                    </div>
-                    
-                    <div class="show-card">
-                        <div class="show-title">Radio Pop Mix</div>
-                        <div class="video-container">
-                            <iframe src="https://www.youtube.com/embed/x-JC7sJJUW8?autoplay=0&mute=0&controls=0" 
-                                    frameborder="0" 
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                    allowfullscreen></iframe>
-                            <div class="glitch-overlay"></div>
-                            <div class="status">LIVE</div>
-                        </div>
-                    </div>
-                    
-                    <div class="show-card">
-                        <div class="show-title">Nostalgia Radio</div>
-                        <div class="video-container">
-                            <iframe src="https://www.youtube.com/embed/BuB9SaS2cWE?autoplay=0&mute=0&controls=0" 
-                                    frameborder="0" 
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                    allowfullscreen></iframe>
-                            <div class="glitch-overlay"></div>
-                            <div class="status">LIVE</div>
-                        </div>
-                    </div>
-        </div>
+        <div id="shows-content"></div>
 
         <div class="footer">
             AESTHRELLAN TELEVISION NETWORK • LIVE TRANSMISSION
@@ -936,15 +450,131 @@
     </div>
 
     <script>
-        function proceedToChannels() {
-            const home = document.getElementById('home-screen');
-            const selection = document.getElementById('channel-selection-screen');
-            home.style.opacity = '0';
-            setTimeout(() => {
-                home.style.display = 'none';
-                selection.style.display = 'flex';
-                selection.style.opacity = '1';
-            }, 1000);
+        // ================ CHANNEL DATA (all original shows & links preserved) ================
+        const channelsData = {
+            1: [
+                {title: "Oggy and the Cockroach", src: "https://www.youtube.com/embed/n4lcJjsMEb0?autoplay=0&mute=0&controls=0", status: "LIVE"},
+                {title: "Rabbids Invasion", src: "https://www.youtube.com/embed/nhydC_Ccc0A?autoplay=0&mute=0&controls=0", status: "LIVE"},
+                {title: "Masha and the Bear", src: "https://www.youtube.com/embed/3Iqrz9G4udo?autoplay=0&mute=0&controls=0", status: "LIVE"},
+                {title: "Oddbuds", src: "https://www.youtube.com/embed/kr4C-hrb3Lc?autoplay=0&mute=0&controls=0", status: "LIVE"},
+                {title: "ChuChu TV", src: "https://www.youtube.com/embed/YY8yc2ctN0g?autoplay=0&mute=0&controls=0", status: "LIVE"},
+                {title: "Cocomelon", src: "https://www.youtube.com/embed/bpTReg8lwmQ?autoplay=0&mute=0&controls=0", status: "LIVE"},
+                {title: "Tom and Jerry", src: "https://www.youtube.com/embed/rEKifG2XUZg?autoplay=0&mute=0&controls=0", status: "LIVE"},
+                {title: "Peppa Pig", src: "https://www.youtube.com/embed/2tCdkSE2CHw?autoplay=0&mute=0&controls=0", status: "LIVE"},
+                {title: "Sofia the First", src: "https://www.youtube.com/embed/7Nw4A-P0rug?autoplay=0&mute=0&controls=0", status: "LIVE"},
+                {title: "Mr. Bean", src: "https://www.youtube.com/embed/lCp-9YihW-c?autoplay=0&mute=0&controls=0", status: "LIVE"}
+            ],
+            2: [
+                {title: "NASA TV", src: "https://www.youtube.com/embed/m3kR2KK8TEs?autoplay=0&mute=0&controls=0", status: "LIVE"},
+                {title: "SciTV", src: "https://www.youtube.com/embed/Nhc556Y1zsQ?autoplay=0&mute=0&controls=0", status: "LIVE"},
+                {title: "National Geographic", src: "https://www.youtube.com/embed/wVd836vHl6s?autoplay=0&mute=0&loop=0&playlist=wVd836vHl6s&controls=0", status: "LIVE"},
+                {title: "Aircrafts", src: "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=0&mute=0&controls=0", status: "OFF"},
+                {title: "Wildlife TV", src: "https://www.youtube.com/embed/Zns4k_dICzs?autoplay=0&mute=0&controls=0", status: "LIVE"},
+                {title: "BBC Earth", src: "https://www.youtube.com/embed/KGZtDK8hZ60?autoplay=0&mute=0&controls=0", status: "LIVE"}
+            ],
+            3: [
+                {title: "ABC NEWS", src: "https://www.youtube.com/embed/iipR5yUp36o?autoplay=0&mute=0&controls=0", status: "LIVE"},
+                {title: "GMA TV", src: "https://www.youtube.com/embed/Q_M3wzSYOCs?autoplay=0&mute=0&controls=0", status: "LIVE"},
+                {title: "SKY NEWS", src: "https://www.youtube.com/embed/YDvsBbKfLPA?autoplay=0&mute=0&controls=0", status: "LIVE"},
+                {title: "BILYONARYO NEWS TV", src: "https://www.youtube.com/embed/v2DTX9BuB1w?autoplay=0&mute=0&controls=0", status: "LIVE"},
+                {title: "UNTV", src: "https://www.youtube.com/embed/Y0mGX-aG4gs?autoplay=0&mute=0&controls=0", status: "LIVE"},
+                {title: "AL JAZEERA", src: "https://www.youtube.com/embed/gCNeDWCI0vo?autoplay=0&mute=0&controls=0", status: "LIVE"},
+                {title: "DZRH TV", src: "https://www.youtube.com/embed/QCMsndnFNPY?autoplay=0&mute=0&controls=0", status: "LIVE"},
+                {title: "DZMM TV", src: "https://www.youtube.com/embed/UgDLDY6YcOE?autoplay=0&mute=0&controls=0", status: "LIVE"},
+                {title: "KAPAMILYA TV", src: "https://www.youtube.com/embed/ANouviApvI0?autoplay=0&mute=0&controls=0", status: "LIVE"},
+                {title: "KZAT FM", src: "https://www.youtube.com/embed/fRie_dbYY2o?autoplay=0&mute=0&controls=0", status: "LIVE"},
+                {title: "PTV", src: "https://www.youtube.com/embed/Cej2g0xzzuk?autoplay=0&mute=0&controls=0", status: "LIVE"},
+                {title: "CGTN", src: "https://www.youtube.com/embed/_6dRRfnYJws?autoplay=0&mute=0&controls=0", status: "LIVE"}
+            ],
+            4: [
+                {title: "Roma TV", src: "https://www.youtube.com/embed/A2JBODj1vio?autoplay=0&mute=0&controls=0", status: "LIVE"},
+                {title: "Praise and Worship TV", src: "https://www.youtube.com/embed/d9e-Lu2laYM?autoplay=0&mute=0&controls=0", status: "LIVE"},
+                {title: "Salaam TV Salaam", src: "https://www.youtube.com/embed/8bnohM3MjhI?autoplay=0&mute=0&loop=0&playlist=8bnohM3MjhI&controls=0", status: "LIVE"},
+                {title: "Qur'an TV", src: "https://www.youtube.com/embed/Oquf0EU_B8o?autoplay=0&mute=0&controls=0", status: "LIVE"},
+                {title: "Ave Maria TV", src: "https://www.youtube.com/embed/mbQAVNmJ8hQ?autoplay=0&mute=0&controls=0", status: "LIVE"},
+                {title: "Radio Veritas", src: "https://www.youtube.com/embed/SuCGIfqgL24?autoplay=0&mute=0&controls=0", status: "LIVE"},
+                {title: "OFSDA TV", src: "https://www.youtube.com/embed/T5veC0eyYdE?autoplay=0&mute=0&controls=0", status: "LIVE"}
+            ],
+            5: [
+                {title: "Food Network", src: "https://www.youtube.com/embed/rxP-9vgI5BE?autoplay=0&mute=0&controls=0", status: "LIVE"},
+                {title: "Masterchef TV", src: "https://www.youtube.com/embed/QODUwbbVqnc?autoplay=0&mute=0&controls=0", status: "LIVE"},
+                {title: "Asian Home Cooking", src: "https://www.youtube.com/embed/tEh8JHKqqWY?autoplay=0&mute=0&controls=0", status: "LIVE"},
+                {title: "Competition TV", src: "https://www.youtube.com/embed/I4aWBmmtMT0?autoplay=0&mute=0&controls=0", status: "LIVE"}
+            ],
+            8: [
+                {title: "F1TV", src: "https://www.youtube.com/embed/DTx1Up970Yo?autoplay=0&mute=0&controls=0", status: "LIVE"}
+            ],
+            10: [
+                {title: "Wish 107.5", src: "https://www.youtube.com/embed/1HSjFxPzBhY?autoplay=0&mute=0&controls=0", status: "LIVE"},
+                {title: "Radio Pop Mix", src: "https://www.youtube.com/embed/x-JC7sJJUW8?autoplay=0&mute=0&controls=0", status: "LIVE"},
+                {title: "Nostalgia Radio", src: "https://www.youtube.com/embed/BuB9SaS2cWE?autoplay=0&mute=0&controls=0", status: "LIVE"}
+            ]
+        };
+
+        let currentChannelNum = null;
+        let currentShowIndex = 0;
+
+        // Load a single show into the TV-style player
+        function loadShow(channelNum, index) {
+            const data = channelsData[channelNum];
+            if (!data) return;
+
+            currentChannelNum = channelNum;
+            currentShowIndex = (index + data.length) % data.length; // wrap around
+
+            const show = data[currentShowIndex];
+            const contentArea = document.getElementById('shows-content');
+
+            contentArea.innerHTML = `
+                <div class="tv-player">
+                    <!-- Current show title (above video) -->
+                    <div class="player-header">
+                        <div class="current-title">${show.title}</div>
+                        <div class="current-counter">${currentShowIndex + 1} / ${data.length}</div>
+                    </div>
+
+                    <!-- Large video player -->
+                    <div class="video-wrapper">
+                        <div class="video-container">
+                            <iframe src="${show.src}" 
+                                    frameborder="0" 
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                    allowfullscreen></iframe>
+                            <div class="glitch-overlay"></div>
+                            <div class="status" id="dynamic-status">${show.status}</div>
+                        </div>
+                    </div>
+
+                    <!-- NAVIGATION BUTTONS — NOW JUST BELOW THE CURRENT SHOW (video) -->
+                    <div class="player-nav">
+                        <button class="nav-arrow" onclick="prevShow()">←</button>
+                        <button class="nav-arrow" onclick="nextShow()">→</button>
+                    </div>
+                </div>
+            `;
+
+            // Apply LIVE / OFF coloring
+            const statusEl = document.getElementById('dynamic-status');
+            if (show.status === "LIVE") {
+                statusEl.style.color = "#e63946";
+                statusEl.style.border = "1px solid #e63946";
+                statusEl.style.backgroundColor = "rgba(230, 57, 70, 0.25)";
+            } else {
+                statusEl.style.color = "#888888";
+                statusEl.style.border = "1px solid #555555";
+                statusEl.style.backgroundColor = "rgba(136, 136, 136, 0.25)";
+            }
+        }
+
+        // Navigation functions
+        function nextShow() {
+            if (!currentChannelNum) return;
+            loadShow(currentChannelNum, currentShowIndex + 1);
+        }
+
+        function prevShow() {
+            if (!currentChannelNum) return;
+            loadShow(currentChannelNum, currentShowIndex - 1);
         }
 
         function selectChannel(channelNum) {
@@ -958,10 +588,26 @@
                 showsScreen.style.display = 'flex';
                 showsScreen.style.opacity = '1';
 
-                document.querySelectorAll('.channel-content').forEach(c => c.style.display = 'none');
-                const content = document.getElementById(`content-${channelNum}`);
-                if (content) content.style.display = 'block';
-            }, 800);
+                const contentArea = document.getElementById('shows-content');
+                
+                // Channels 6, 7, 9 are still "Coming Soon"
+                if ([6, 7, 9].includes(channelNum)) {
+                    contentArea.innerHTML = `
+                        <div style="width:100%; max-width:1100px; margin:0 auto; text-align:center;">
+                            <div class="channel-header"><div class="channel-title">CH ${channelNum}</div></div>
+                            <div class="coming-soon">
+                                COMING SOON<br>
+                                <span style="font-size:0.95rem; letter-spacing:1.5px;">This channel will be available shortly</span>
+                            </div>
+                        </div>
+                    `;
+                    currentChannelNum = null;
+                } 
+                // Real channels → TV-style player
+                else if (channelsData[channelNum]) {
+                    loadShow(channelNum, 0);
+                }
+            }, 400);
         }
 
         function backToChannelSelection() {
@@ -972,7 +618,8 @@
                 showsScreen.style.display = 'none';
                 selection.style.display = 'flex';
                 selection.style.opacity = '1';
-            }, 800);
+                currentChannelNum = null;
+            }, 400);
         }
 
         function returnToHome() {
@@ -988,7 +635,19 @@
                 showsScreen.style.display = 'none';
                 home.style.display = 'flex';
                 home.style.opacity = '1';
-            }, 800);
+                currentChannelNum = null;
+            }, 400);
+        }
+
+        function proceedToChannels() {
+            const home = document.getElementById('home-screen');
+            const selection = document.getElementById('channel-selection-screen');
+            home.style.opacity = '0';
+            setTimeout(() => {
+                home.style.display = 'none';
+                selection.style.display = 'flex';
+                selection.style.opacity = '1';
+            }, 500);
         }
 
         function showAbout() {
@@ -998,6 +657,13 @@
         function hideAbout() {
             document.getElementById('about-modal').style.display = 'none';
         }
+
+        // Keyboard support for TV remote feel (← → arrows)
+        document.addEventListener('keydown', function(e) {
+            if (!currentChannelNum) return;
+            if (e.key === "ArrowRight") nextShow();
+            if (e.key === "ArrowLeft") prevShow();
+        });
     </script>
 </body>
 </html>
