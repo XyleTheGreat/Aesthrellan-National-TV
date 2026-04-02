@@ -135,63 +135,86 @@
             border-radius: 5px;
         }
 
-        /* Channel Selection Screen */
+        /* ==================== FIXED CHANNEL SELECTION SCREEN ==================== */
         #channel-selection-screen {
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
             display: none;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background: rgba(10, 10, 10, 0.88);
-            backdrop-filter: blur(12px);
+            background: rgba(10, 10, 10, 0.95);
             z-index: 150;
             transition: opacity 0.8s ease;
+            overflow-y: auto;           /* ← THIS MAKES IT SCROLLABLE */
+            padding: 80px 15px 30px;    /* top padding for header space */
         }
 
-        .selection-header {
+        .channel-header-bar {
+            position: absolute;
+            top: 18px;
+            left: 18px;
+            right: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 30;
+        }
+
+        .selection-title {
             font-size: 1.4rem;
             font-weight: 400;
             letter-spacing: 2px;
-            margin-bottom: 40px;
             text-transform: uppercase;
             text-shadow: var(--glow);
         }
 
         .glass-cabinet {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
             width: 100%;
-            max-width: 920px;
-            padding: 0 20px;
+            max-width: 520px;
+            margin: 0 auto;
         }
 
         .glass-btn {
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(14px);
-            border: 1.5px solid rgba(230, 57, 70, 0.4);
-            border-radius: 10px;
+            background: #111;
+            border: 2px solid var(--primary-red);
+            border-radius: 8px;
             padding: 22px 20px;
-            font-size: 1.05rem;
+            font-size: 1.25rem;
             font-weight: 400;
-            letter-spacing: 1.5px;
+            letter-spacing: 3px;
             color: white;
             text-align: center;
             cursor: pointer;
-            transition: all 0.4s ease;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            min-height: 78px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .glass-btn:hover {
             background: rgba(230, 57, 70, 0.15);
-            transform: scale(1.05);
-            border-color: var(--primary-red);
+            transform: scale(1.03);
             box-shadow: var(--glow);
         }
 
-        /* Shows Screen - TV Style */
+        /* Minimal & flexible on mobile */
+        @media (max-width: 480px) {
+            .glass-btn {
+                font-size: 1.15rem;
+                padding: 20px 15px;
+                min-height: 68px;
+            }
+            #channel-selection-screen {
+                padding-top: 70px;
+            }
+        }
+
+        /* Shows Screen - TV Style (unchanged) */
         #shows-screen {
             position: fixed;
             top: 0; left: 0;
@@ -211,7 +234,6 @@
             justify-content: center;
         }
 
-        /* Top Navigation Bar */
         .top-nav {
             position: absolute;
             top: 18px;
@@ -240,7 +262,6 @@
             background: var(--primary-red);
         }
 
-        /* TV-Style Player */
         .tv-player {
             width: 100%;
             max-width: 1180px;
@@ -317,7 +338,6 @@
             z-index: 3;
         }
 
-        /* Navigation Buttons — NOW PLACED JUST BELOW THE VIDEO (current show) */
         .player-nav {
             display: flex;
             align-items: center;
@@ -391,7 +411,7 @@
     <!-- About Modal -->
     <div id="about-modal">
         <div class="modal-content">
-            The <i>Aesthrellan National Television (ANTV)</i> is the official broadcasting network of the People's Republic of Aesthrella, delivering five unique channels — with a mix of live transmissions, cultural programs, news, and entertainment to citizens and viewers worldwide.<br><br>
+            The <i>Aesthrellan National Television (ANTV)</i> is the official broadcasting network of the People's Republic of Aesthrella, delivering ten unique channels — with a mix of live transmissions, cultural programs, news, and entertainment to citizens and viewers worldwide.<br><br>
             LIST OF CHANNELS AND FOCUS POINTS :<br><br>
             CH 1 — <i>Kid Shows</i>
             <br>
@@ -416,9 +436,15 @@
         <button class="modal-close" onclick="hideAbout()">CLOSE</button>
     </div>
 
-    <!-- Channel Selection Screen -->
+    <!-- ==================== FIXED CHANNEL SELECTION SCREEN ==================== -->
     <div id="channel-selection-screen">
-        <div class="selection-header">Select Channel</div>
+        <!-- Top bar with HOME button -->
+        <div class="channel-header-bar">
+            <div class="selection-title">Select Channel</div>
+            <button class="home-btn" onclick="returnToHome()">HOME</button>
+        </div>
+
+        <!-- Scrollable vertical list of channels (minimal & mobile-friendly) -->
         <div class="glass-cabinet">
             <div class="glass-btn" onclick="selectChannel(1)">CH 1</div>
             <div class="glass-btn" onclick="selectChannel(2)">CH 2</div>
@@ -431,12 +457,10 @@
             <div class="glass-btn" onclick="selectChannel(9)">CH 9</div>
             <div class="glass-btn" onclick="selectChannel(10)">CH 10</div>
         </div>
-        <button class="home-btn" onclick="returnToHome()" style="position:absolute; top:18px; right:18px;">HOME</button>
     </div>
 
     <!-- Shows Screen -->
     <div id="shows-screen">
-        <!-- Top Navigation -->
         <div class="top-nav">
             <button class="back-btn" onclick="backToChannelSelection()">BACK</button>
             <button class="home-btn" onclick="returnToHome()">HOME</button>
@@ -445,107 +469,56 @@
         <div id="shows-content"></div>
 
         <div class="footer">
-            AESTHRELLAN TELEVISION NETWORK • LIVE TRANSMISSION
+            AESTHRELLAN TELEVISION NETWORK  (ANTV) • LIVE TRANSMISSION
         </div>
     </div>
 
     <script>
-        // ================ CHANNEL DATA (all original shows & links preserved) ================
+        // ================ CHANNEL DATA (unchanged) ================
         const channelsData = {
-            1: [
-                {title: "Oggy and the Cockroach", src: "https://www.youtube.com/embed/n4lcJjsMEb0?autoplay=0&mute=0&controls=0", status: "LIVE"},
-                {title: "Rabbids Invasion", src: "https://www.youtube.com/embed/nhydC_Ccc0A?autoplay=0&mute=0&controls=0", status: "LIVE"},
-                {title: "Masha and the Bear", src: "https://www.youtube.com/embed/3Iqrz9G4udo?autoplay=0&mute=0&controls=0", status: "LIVE"},
-                {title: "Oddbuds", src: "https://www.youtube.com/embed/kr4C-hrb3Lc?autoplay=0&mute=0&controls=0", status: "LIVE"},
-                {title: "ChuChu TV", src: "https://www.youtube.com/embed/YY8yc2ctN0g?autoplay=0&mute=0&controls=0", status: "LIVE"},
-                {title: "Cocomelon", src: "https://www.youtube.com/embed/bpTReg8lwmQ?autoplay=0&mute=0&controls=0", status: "LIVE"},
-                {title: "Tom and Jerry", src: "https://www.youtube.com/embed/rEKifG2XUZg?autoplay=0&mute=0&controls=0", status: "LIVE"},
-                {title: "Peppa Pig", src: "https://www.youtube.com/embed/2tCdkSE2CHw?autoplay=0&mute=0&controls=0", status: "LIVE"},
-                {title: "Sofia the First", src: "https://www.youtube.com/embed/7Nw4A-P0rug?autoplay=0&mute=0&controls=0", status: "LIVE"},
-                {title: "Mr. Bean", src: "https://www.youtube.com/embed/lCp-9YihW-c?autoplay=0&mute=0&controls=0", status: "LIVE"}
-            ],
-            2: [
-                {title: "NASA TV", src: "https://www.youtube.com/embed/m3kR2KK8TEs?autoplay=0&mute=0&controls=0", status: "LIVE"},
-                {title: "SciTV", src: "https://www.youtube.com/embed/Nhc556Y1zsQ?autoplay=0&mute=0&controls=0", status: "LIVE"},
-                {title: "National Geographic", src: "https://www.youtube.com/embed/wVd836vHl6s?autoplay=0&mute=0&loop=0&playlist=wVd836vHl6s&controls=0", status: "LIVE"},
-                {title: "Aircrafts", src: "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=0&mute=0&controls=0", status: "OFF"},
-                {title: "Wildlife TV", src: "https://www.youtube.com/embed/Zns4k_dICzs?autoplay=0&mute=0&controls=0", status: "LIVE"},
-                {title: "BBC Earth", src: "https://www.youtube.com/embed/KGZtDK8hZ60?autoplay=0&mute=0&controls=0", status: "LIVE"}
-            ],
-            3: [
-                {title: "ABC NEWS", src: "https://www.youtube.com/embed/iipR5yUp36o?autoplay=0&mute=0&controls=0", status: "LIVE"},
-                {title: "GMA TV", src: "https://www.youtube.com/embed/Q_M3wzSYOCs?autoplay=0&mute=0&controls=0", status: "LIVE"},
-                {title: "SKY NEWS", src: "https://www.youtube.com/embed/YDvsBbKfLPA?autoplay=0&mute=0&controls=0", status: "LIVE"},
-                {title: "BILYONARYO NEWS TV", src: "https://www.youtube.com/embed/v2DTX9BuB1w?autoplay=0&mute=0&controls=0", status: "LIVE"},
-                {title: "UNTV", src: "https://www.youtube.com/embed/Y0mGX-aG4gs?autoplay=0&mute=0&controls=0", status: "LIVE"},
-                {title: "AL JAZEERA", src: "https://www.youtube.com/embed/gCNeDWCI0vo?autoplay=0&mute=0&controls=0", status: "LIVE"},
-                {title: "DZRH TV", src: "https://www.youtube.com/embed/QCMsndnFNPY?autoplay=0&mute=0&controls=0", status: "LIVE"},
-                {title: "DZMM TV", src: "https://www.youtube.com/embed/UgDLDY6YcOE?autoplay=0&mute=0&controls=0", status: "LIVE"},
-                {title: "KAPAMILYA TV", src: "https://www.youtube.com/embed/ANouviApvI0?autoplay=0&mute=0&controls=0", status: "LIVE"},
-                {title: "KZAT FM", src: "https://www.youtube.com/embed/fRie_dbYY2o?autoplay=0&mute=0&controls=0", status: "LIVE"},
-                {title: "PTV", src: "https://www.youtube.com/embed/Cej2g0xzzuk?autoplay=0&mute=0&controls=0", status: "LIVE"},
-                {title: "CGTN", src: "https://www.youtube.com/embed/_6dRRfnYJws?autoplay=0&mute=0&controls=0", status: "LIVE"}
-            ],
-            4: [
-                {title: "Roma TV", src: "https://www.youtube.com/embed/A2JBODj1vio?autoplay=0&mute=0&controls=0", status: "LIVE"},
-                {title: "Praise and Worship TV", src: "https://www.youtube.com/embed/d9e-Lu2laYM?autoplay=0&mute=0&controls=0", status: "LIVE"},
-                {title: "Salaam TV Salaam", src: "https://www.youtube.com/embed/8bnohM3MjhI?autoplay=0&mute=0&loop=0&playlist=8bnohM3MjhI&controls=0", status: "LIVE"},
-                {title: "Qur'an TV", src: "https://www.youtube.com/embed/Oquf0EU_B8o?autoplay=0&mute=0&controls=0", status: "LIVE"},
-                {title: "Ave Maria TV", src: "https://www.youtube.com/embed/mbQAVNmJ8hQ?autoplay=0&mute=0&controls=0", status: "LIVE"},
-                {title: "Radio Veritas", src: "https://www.youtube.com/embed/SuCGIfqgL24?autoplay=0&mute=0&controls=0", status: "LIVE"},
-                {title: "OFSDA TV", src: "https://www.youtube.com/embed/T5veC0eyYdE?autoplay=0&mute=0&controls=0", status: "LIVE"}
-            ],
-            5: [
-                {title: "Food Network", src: "https://www.youtube.com/embed/rxP-9vgI5BE?autoplay=0&mute=0&controls=0", status: "LIVE"},
-                {title: "Masterchef TV", src: "https://www.youtube.com/embed/QODUwbbVqnc?autoplay=0&mute=0&controls=0", status: "LIVE"},
-                {title: "Asian Home Cooking", src: "https://www.youtube.com/embed/tEh8JHKqqWY?autoplay=0&mute=0&controls=0", status: "LIVE"},
-                {title: "Competition TV", src: "https://www.youtube.com/embed/I4aWBmmtMT0?autoplay=0&mute=0&controls=0", status: "LIVE"}
-            ],
-            8: [
-                {title: "F1TV", src: "https://www.youtube.com/embed/DTx1Up970Yo?autoplay=0&mute=0&controls=0", status: "LIVE"}
-            ],
-            10: [
-                {title: "Wish 107.5", src: "https://www.youtube.com/embed/1HSjFxPzBhY?autoplay=0&mute=0&controls=0", status: "LIVE"},
-                {title: "Radio Pop Mix", src: "https://www.youtube.com/embed/x-JC7sJJUW8?autoplay=0&mute=0&controls=0", status: "LIVE"},
-                {title: "Nostalgia Radio", src: "https://www.youtube.com/embed/BuB9SaS2cWE?autoplay=0&mute=0&controls=0", status: "LIVE"}
-            ]
+            1: [{title: "Oggy and the Cockroach", src: "https://www.youtube.com/embed/n4lcJjsMEb0?autoplay=0&mute=0&controls=0", status: "LIVE"}, {title: "Rabbids Invasion", src: "https://www.youtube.com/embed/nhydC_Ccc0A?autoplay=0&mute=0&controls=0", status: "LIVE"}, {title: "Masha and the Bear", src: "https://www.youtube.com/embed/3Iqrz9G4udo?autoplay=0&mute=0&controls=0", status: "LIVE"}, {title: "Oddbods", src: "https://www.youtube.com/embed/kr4C-hrb3Lc?autoplay=0&mute=0&controls=0", status: "LIVE"}, {title: "ChuChu TV", src: "https://www.youtube.com/embed/YY8yc2ctN0g?autoplay=0&mute=0&controls=0", status: "LIVE"}, {title: "Cocomelon", src: "https://www.youtube.com/embed/bpTReg8lwmQ?autoplay=0&mute=0&controls=0", status: "LIVE"}, {title: "Tom and Jerry", src: "https://www.youtube.com/embed/rEKifG2XUZg?autoplay=0&mute=0&controls=0", status: "LIVE"}, {title: "Peppa Pig", src: "https://www.youtube.com/embed/2tCdkSE2CHw?autoplay=0&mute=0&controls=0", status: "LIVE"}, {title: "Sofia the First", src: "https://www.youtube.com/embed/7Nw4A-P0rug?autoplay=0&mute=0&controls=0", status: "LIVE"}, {title: "Mr. Bean", src: "https://www.youtube.com/embed/lCp-9YihW-c?autoplay=0&mute=0&controls=0", status: "LIVE"}],
+
+            2: [{title: "NASA TV", src: "https://www.youtube.com/embed/6RwfNBtepa4?autoplay=0&mute=0&controls=0", status: "LIVE"}, {title: "SciTV", src: "https://www.youtube.com/embed/Nhc556Y1zsQ?autoplay=0&mute=0&controls=0", status: "LIVE"}, {title: "BBC Timestamp", src: "https://www.youtube.com/embed/6ftAy0nBdAQ?autoplay=0&mute=0&controls=0", status: "LIVE"}, {title: "National Geographic", src: "https://www.youtube.com/embed/wVd836vHl6s?autoplay=0&mute=0&loop=0&playlist=wVd836vHl6s&controls=0", status: "LIVE"}, {title: "Wildlife TV", src: "https://www.youtube.com/embed/Zns4k_dICzs?autoplay=0&mute=0&controls=0", status: "LIVE"}, {title: "BBC Earth", src: "https://www.youtube.com/embed/KGZtDK8hZ60?autoplay=0&mute=0&controls=0", status: "LIVE"}, {title: "NatGeo Animals", src: "https://www.youtube.com/embed/MiQe9ob9aDc?autoplay=0&mute=0&controls=0", status: "LIVE"}],
+
+            3: [{title: "AL JAZEERA", src: "https://www.youtube.com/embed/gCNeDWCI0vo?autoplay=0&mute=0&controls=0", status: "LIVE"}, {title: "ABC7 NY", src: "https://www.youtube.com/embed/dNmBzcCwnNU?autoplay=0&mute=0&controls=0", status: "LIVE"}, {title: "FRANCE 24 TV", src: "https://www.youtube.com/embed/Ap-UM1O9RBU?autoplay=0&mute=0&controls=0", status: "LIVE"}, {title: "24 ORAS", src: "https://www.youtube.com/embed/u-vKnsR9xk4?autoplay=0&mute=0&controls=0", status: "LIVE"}, {title: "TRT WORLD TV", src: "https://www.youtube.com/embed/ABfFhWzWs0s?autoplay=0&mute=0&controls=0", status: "LIVE"}],
+
+            4: [{title: "Gregorian TV", src: "https://www.youtube.com/embed/DBBMCgUqQqE?autoplay=0&mute=0&controls=0", status: "LIVE"}, {title: "Roma TV", src: "https://www.youtube.com/embed/A2JBODj1vio?autoplay=0&mute=0&controls=0", status: "LIVE"}, {title: "Praise and Worship TV", src: "https://www.youtube.com/embed/d9e-Lu2laYM?autoplay=0&mute=0&controls=0", status: "LIVE"}, {title: "Ave Maria TV", src: "https://www.youtube.com/embed/mbQAVNmJ8hQ?autoplay=0&mute=0&controls=0", status: "LIVE"}, {title: "OFSDA TV", src: "https://www.youtube.com/embed/T5veC0eyYdE?autoplay=0&mute=0&controls=0", status: "LIVE"}],
+
+            5: [{title: "Food Network", src: "https://www.youtube.com/embed/rxP-9vgI5BE?autoplay=0&mute=0&controls=0", status: "LIVE"}, {title: "Masterchef TV", src: "https://www.youtube.com/embed/QODUwbbVqnc?autoplay=0&mute=0&controls=0", status: "LIVE"}, {title: "Asian Home Cooking", src: "https://www.youtube.com/embed/tEh8JHKqqWY?autoplay=0&mute=0&controls=0", status: "LIVE"}, {title: "Competition TV", src: "https://www.youtube.com/embed/I4aWBmmtMT0?autoplay=0&mute=0&controls=0", status: "LIVE"}],
+
+            7: [{title: "Learn English TV", src: "https://www.youtube.com/embed/xEqUt-p5KyA?autoplay=0&mute=0&controls=0", status: "LIVE"}, {title: "Learn Japanese TV", src: "https://www.youtube.com/embed/OqwA-w3mMx0?autoplay=0&mute=0&controls=0", status: "LIVE"}, {title: "Learn French TV", src: "https://www.youtube.com/embed/PeGTZCZPmg8?autoplay=0&mute=0&controls=0", status: "LIVE"}, {title: "Learn German TV", src: "https://www.youtube.com/embed/85bR1SsXH6E?autoplay=0&mute=0&controls=0", status: "LIVE"}],
+
+            8: [{title: "MLBB TV", src: "https://www.youtube.com/embed/CymKAhjrpxQ?autoplay=0&mute=0&controls=0", status: "LIVE"}, {title: "F1TV", src: "https://www.youtube.com/embed/DTx1Up970Yo?autoplay=0&mute=0&controls=0", status: "LIVE"}, {title: "talkSport", src: "https://www.youtube.com/embed/MiJIODpKngw?autoplay=0&mute=0&controls=0", status: "LIVE"}, {title: "FloRacing", src: "https://www.youtube.com/embed/YA1ruaeoZZY?autoplay=0&mute=0&controls=0", status: "LIVE"}, {title: "DFB Play TV", src: "https://www.youtube.com/embed/h0rCsHR8mWc?autoplay=0&mute=0&controls=0", status: "LIVE"}],
+
+            9: [{title: "Absolute History TV", src: "https://www.youtube.com/embed/DrxFPqPf1cA?autoplay=0&mute=0&controls=0", status: "LIVE"}, {title: "WWII TV", src: "https://www.youtube.com/embed/imQGaX_ZdiI?autoplay=0&mute=0&controls=0", status: "LIVE"}, {title: "Made In History", src: "https://www.youtube.com/embed/wxTPk0LKAk4?autoplay=0&mute=0&controls=0", status: "LIVE"}, {title: "War Stories TV", src: "https://www.youtube.com/embed/kU3Biz7ffUE?autoplay=0&mute=0&controls=0", status: "LIVE"}],
+
+            10: [{title: "947 Joburg Radio Africa", src: "https://www.youtube.com/embed/T68d5MUspE8?autoplay=0&mute=0&controls=0", status: "LIVE"}, {title: "Radio Pop Mix", src: "https://www.youtube.com/embed/x-JC7sJJUW8?autoplay=0&mute=0&controls=0", status: "LIVE"}, {title: "Nostalgia Radio", src: "https://www.youtube.com/embed/BuB9SaS2cWE?autoplay=0&mute=0&controls=0", status: "LIVE"}, {title: "Nostalgia 2000", src: "https://www.youtube.com/embed/RwAbxMrU2T0?autoplay=0&mute=0&controls=0", status: "LIVE"}, {title: "Reggae Radio", src: "https://www.youtube.com/embed/5tq8XCwKqqQ?autoplay=0&mute=0&controls=0", status: "LIVE"}]
         };
 
         let currentChannelNum = null;
         let currentShowIndex = 0;
 
-        // Load a single show into the TV-style player
-        function loadShow(channelNum, index) {
+function loadShow(channelNum, index) {
             const data = channelsData[channelNum];
             if (!data) return;
-
             currentChannelNum = channelNum;
-            currentShowIndex = (index + data.length) % data.length; // wrap around
-
+            currentShowIndex = (index + data.length) % data.length;
             const show = data[currentShowIndex];
             const contentArea = document.getElementById('shows-content');
 
             contentArea.innerHTML = `
                 <div class="tv-player">
-                    <!-- Current show title (above video) -->
                     <div class="player-header">
                         <div class="current-title">${show.title}</div>
                         <div class="current-counter">${currentShowIndex + 1} / ${data.length}</div>
                     </div>
-
-                    <!-- Large video player -->
                     <div class="video-wrapper">
                         <div class="video-container">
-                            <iframe src="${show.src}" 
-                                    frameborder="0" 
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                    allowfullscreen></iframe>
+                            <iframe src="${show.src}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                             <div class="glitch-overlay"></div>
                             <div class="status" id="dynamic-status">${show.status}</div>
                         </div>
                     </div>
-
-                    <!-- NAVIGATION BUTTONS — NOW JUST BELOW THE CURRENT SHOW (video) -->
                     <div class="player-nav">
                         <button class="nav-arrow" onclick="prevShow()">←</button>
                         <button class="nav-arrow" onclick="nextShow()">→</button>
@@ -553,7 +526,6 @@
                 </div>
             `;
 
-            // Apply LIVE / OFF coloring
             const statusEl = document.getElementById('dynamic-status');
             if (show.status === "LIVE") {
                 statusEl.style.color = "#e63946";
@@ -566,16 +538,8 @@
             }
         }
 
-        // Navigation functions
-        function nextShow() {
-            if (!currentChannelNum) return;
-            loadShow(currentChannelNum, currentShowIndex + 1);
-        }
-
-        function prevShow() {
-            if (!currentChannelNum) return;
-            loadShow(currentChannelNum, currentShowIndex - 1);
-        }
+        function nextShow() { if (currentChannelNum) loadShow(currentChannelNum, currentShowIndex + 1); }
+        function prevShow() { if (currentChannelNum) loadShow(currentChannelNum, currentShowIndex - 1); }
 
         function selectChannel(channelNum) {
             const selection = document.getElementById('channel-selection-screen');
@@ -588,23 +552,15 @@
                 showsScreen.style.display = 'flex';
                 showsScreen.style.opacity = '1';
 
-                const contentArea = document.getElementById('shows-content');
-                
-                // Channels 6, 7, 9 are still "Coming Soon"
-                if ([6, 7, 9].includes(channelNum)) {
-                    contentArea.innerHTML = `
+                if ([6].includes(channelNum)) {
+                    document.getElementById('shows-content').innerHTML = `
                         <div style="width:100%; max-width:1100px; margin:0 auto; text-align:center;">
                             <div class="channel-header"><div class="channel-title">CH ${channelNum}</div></div>
-                            <div class="coming-soon">
-                                COMING SOON<br>
-                                <span style="font-size:0.95rem; letter-spacing:1.5px;">This channel will be available shortly</span>
-                            </div>
+                            <div class="coming-soon">COMING SOON<br><span style="font-size:0.95rem; letter-spacing:1.5px;">This channel will be available shortly</span></div>
                         </div>
                     `;
                     currentChannelNum = null;
-                } 
-                // Real channels → TV-style player
-                else if (channelsData[channelNum]) {
+                } else if (channelsData[channelNum]) {
                     loadShow(channelNum, 0);
                 }
             }, 400);
@@ -658,7 +614,6 @@
             document.getElementById('about-modal').style.display = 'none';
         }
 
-        // Keyboard support for TV remote feel (← → arrows)
         document.addEventListener('keydown', function(e) {
             if (!currentChannelNum) return;
             if (e.key === "ArrowRight") nextShow();
